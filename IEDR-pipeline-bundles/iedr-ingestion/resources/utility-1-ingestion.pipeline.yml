@@ -1,0 +1,13 @@
+resources:
+    pipelines:
+        utility_1_ingestion_pipeline:
+            name: utility_1_ingestion_pipeline
+            catalog: iedr-delta-catalog
+            schema: bronze
+            libraries:
+                - file:
+                    path: ../src/bronze/**
+            serverless: true
+            configuration:
+                bundle.sourcePath: ${workspace.file_path}
+                utility.id: "utility_1"

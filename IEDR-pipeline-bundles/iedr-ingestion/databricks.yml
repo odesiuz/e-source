@@ -1,0 +1,5 @@
+bundle:
+  name: iedr_ingestion_pipeline
+include:
+  - resources/*.yml
+  - resources/*/*.yml
