@@ -19,9 +19,9 @@ utility_2_schema_mapping = {
 	"hca_refresh_date": "hosting_capacity_adopted_date"}
 
 def get_schema_mapping(utility_id: str) -> dict:
-	if utility_id == "utility_1":
+	if utility_id.lower() == "utility_1":
 		return utility_1_schema_mapping
-	elif utility_id == "utility_2":
+	elif utility_id.lower() == "utility_2":
 		return utility_2_schema_mapping
 	else:
 		raise ValueError(f"Unsupported UTILITY_ID: {utility_id}")
