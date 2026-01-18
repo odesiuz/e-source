@@ -19,9 +19,9 @@ UTILITY_ID = spark.conf.get("utility.id")
 IEDR_CATALOG = spark.conf.get("pipelines.catalog")
 SCHEMA = spark.conf.get("pipelines.schema")
 
-@dp.table(name=f"`{IEDR_CATALOG}`.{SCHEMA}.{UTILITY_ID}_circuit_normalized_table", table_properties={"quality": "normalized"})
+@dp.table(name=f"`{IEDR_CATALOG}`.{SCHEMA}.{UTILITY_ID}_circuit_normalized_table", table_properties={"quality": "silver"})
 def network_circuit_data_normalized():
-	schema_mapping = get_schema_mapping(UTILITY_ID)
+	schema_mapping = get_schema_mapping(utility_id=UTILITY_ID, dataset_key="circuit")
 	if UTILITY_ID.lower() == "utility_1":
 		return (
 		spark.read.format("delta")
