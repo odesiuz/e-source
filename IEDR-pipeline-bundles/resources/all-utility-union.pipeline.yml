@@ -6,7 +6,7 @@ resources:
             schema: silver
             libraries:
                 - file:
-                    path: ../src/silver/normalized_union/**
+                    path: ../src/iedr-transformation/silver/normalized_union/**
             serverless: true
             configuration:
                 bundle.sourcePath: ${workspace.file_path}

@@ -6,7 +6,7 @@ resources:
             schema: bronze
             libraries:
                 - file:
-                    path: ../src/bronze/**/*.py
+                    path: ../src/iedr-ingestion/bronze/**
             serverless: true
             configuration:
                 bundle.sourcePath: ${workspace.file_path}

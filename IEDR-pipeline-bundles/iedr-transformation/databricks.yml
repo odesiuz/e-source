@@ -1,5 +1,0 @@
-bundle:
-  name: iedr_transformation_pipeline
-include:
-  - resources/*.yml
-  - resources/*/*.yml
