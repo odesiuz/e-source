@@ -16,7 +16,7 @@ except ImportError:
 IEDR_CATALOG = spark.conf.get("pipelines.catalog")
 SCHEMA = spark.conf.get("pipelines.schema")
 
-@dp.table(name=f"`{IEDR_CATALOG}`.{SCHEMA}.all_utilities_circuit_normalized_table", table_properties={"quality": "silver"})
+@dp.table(name=f"`{IEDR_CATALOG}`.{SCHEMA}.all_utilities_silver_table", table_properties={"quality": "silver"})
 def all_utilities_network_circuit_data_normalized():
 	from functools import reduce
 
