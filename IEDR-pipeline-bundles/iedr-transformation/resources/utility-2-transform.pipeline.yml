@@ -1,0 +1,13 @@
+resources:
+    pipelines:
+        utility_2_transformation_pipeline:
+            name: utility_2_transformation_pipeline
+            catalog: iedr-delta-catalog
+            schema: silver
+            libraries:
+                - file:
+                    path: ../src/silver/**/*.py
+            serverless: true
+            configuration:
+                bundle.sourcePath: ${workspace.file_path}
+                utility.id: "utility_2"

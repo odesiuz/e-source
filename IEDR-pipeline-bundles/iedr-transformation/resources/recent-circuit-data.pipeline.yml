@@ -1,0 +1,12 @@
+resources:
+    pipelines:
+        recent_circuit_data_pipeline:
+            name: recent_circuit_data_pipeline
+            catalog: iedr-delta-catalog
+            schema: gold
+            libraries:
+                - file:
+                    path: ../src/gold/**
+            serverless: true
+            configuration:
+                bundle.sourcePath: ${workspace.file_path}
