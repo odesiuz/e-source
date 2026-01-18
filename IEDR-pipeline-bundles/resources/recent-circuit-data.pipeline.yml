@@ -6,7 +6,7 @@ resources:
             schema: gold
             libraries:
                 - file:
-                    path: ../src/iedr-transformation/gold/**
+                    path: ../src/iedr-transformation/gold/recent_circuit_data.py
             serverless: true
             configuration:
                 bundle.sourcePath: ${workspace.file_path}
