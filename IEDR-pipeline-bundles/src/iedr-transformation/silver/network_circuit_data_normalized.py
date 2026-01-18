@@ -16,9 +16,10 @@ except ImportError:
 from schema_mapper import get_schema_mapping
 
 UTILITY_ID = spark.conf.get("utility.id")
-IEDR_CATALOG = "iedr-delta-catalog"
+IEDR_CATALOG = spark.conf.get("pipelines.catalog")
+SCHEMA = spark.conf.get("pipelines.schema")
 
-@dp.table(name=f"`{IEDR_CATALOG}`.silver.{UTILITY_ID}_circuit_normalized_table", table_properties={"quality": "normalized"})
+@dp.table(name=f"`{IEDR_CATALOG}`.{SCHEMA}.{UTILITY_ID}_circuit_normalized_table", table_properties={"quality": "normalized"})
 def network_circuit_data_normalized():
 	schema_mapping = get_schema_mapping(UTILITY_ID)
 	if UTILITY_ID.lower() == "utility_1":

@@ -33,6 +33,7 @@ resources:
           timeout_seconds: 3600
           max_retries: 2
           retry_on_timeout: false
+          run_if: "ALL_SUCCESS"
         - task_key: utility_2_transformation_pipeline_task
           description: "Utility 2 transformation pipeline Task using Lakeflow Declarative Pipelines"
           pipeline_task:
@@ -41,6 +42,7 @@ resources:
           timeout_seconds: 3600
           max_retries: 2
           retry_on_timeout: false
+          run_if: "ALL_SUCCESS"
         - task_key: all_utility_transformation_pipeline_task
           description: "All utility transformation pipeline task using Lakeflow Declarative Pipelines"
           pipeline_task:
@@ -50,3 +52,4 @@ resources:
           timeout_seconds: 3600
           max_retries: 2
           retry_on_timeout: false
+          run_if: "ALL_SUCCESS"

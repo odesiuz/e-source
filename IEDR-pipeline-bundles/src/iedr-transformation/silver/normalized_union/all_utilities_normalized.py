@@ -13,13 +13,14 @@ try:
 except ImportError:
 	raise ImportError("pyspark.pipelines module is not available in this environment.")
 
-IEDR_CATALOG = "iedr-delta-catalog"
+IEDR_CATALOG = spark.conf.get("pipelines.catalog")
+SCHEMA = spark.conf.get("pipelines.schema")
 
-@dp.table(name=f"`{IEDR_CATALOG}`.silver.all_utilities_circuit_normalized_table", table_properties={"quality": "silver"})
+@dp.table(name=f"`{IEDR_CATALOG}`.{SCHEMA}.all_utilities_circuit_normalized_table", table_properties={"quality": "silver"})
 def all_utilities_network_circuit_data_normalized():
 	from functools import reduce
 
-	catalog_db = f"`{IEDR_CATALOG}`.silver"
+	catalog_db = f"`{IEDR_CATALOG}`.{SCHEMA}"
 	tables_df = spark.sql(f"SHOW TABLES IN {catalog_db}")
 	table_names = [r.tableName for r in tables_df.collect() if r.tableName.endswith("_circuit_normalized_table")]
 
