@@ -2,7 +2,7 @@ resources:
   jobs:
     iedr_ingestion_job:
       name: iedr_ingestion_job
-      max_concurrent_runs: 2
+      max_concurrent_runs: 3
       timeout_seconds: 3600
       schedule:
         quartz_cron_expression: "0 0 0 1 * ?"
@@ -49,6 +49,15 @@ resources:
             pipeline_id: ${resources.pipelines.all_utility_union_pipeline.id}
           depends_on: [ { "task_key": utility_1_transformation_pipeline_task },
                         { "task_key": utility_2_transformation_pipeline_task } ]
+          timeout_seconds: 3600
+          max_retries: 2
+          retry_on_timeout: false
+          run_if: "ALL_SUCCESS"
+        - task_key: recent_circuit_data_pipeline_task
+          description: "Gold table recent circuit data pipeline task using Lakeflow Declarative Pipelines"
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.recent_circuit_data_pipeline.id}
+          depends_on: [ { "task_key": all_utility_transformation_pipeline_task } ]
           timeout_seconds: 3600
           max_retries: 2
           retry_on_timeout: false
