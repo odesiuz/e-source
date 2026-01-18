@@ -4,24 +4,63 @@
     Author Email: ono@alexi.com
     File Name: schema_mapper.py
 """
-utility_1_schema_mapping = {
+
+# dataset keys to normalized schema mapping for different utilities
+CIRCUIT = "circuit"
+INSTALLED_DER = "installed_der"
+PLANNED_DER = "planned_der"
+
+utility_1_circuit_schema_mapping = {
 	"NYHCPV_csv_FFEEDER": "utility_feeder_id",
 	"NYHCPV_csv_FVOLTAGE": "feeder_voltage_kv",
 	"NYHCPV_csv_FMAXHC": "max_hosting_capacity_mw",
 	"NYHCPV_csv_FMINHC": "min_hosting_capacity_mw",
 	"NYHCPV_csv_FHCADATE": "hosting_capacity_adopted_date"}
 
-utility_2_schema_mapping = {
+utility_2_circuit_schema_mapping = {
 	"Master_CDF": "utility_feeder_id",
 	"feeder_voltage": "feeder_voltage_kv",
 	"feeder_max_hc": "max_hosting_capacity_mw",
 	"feeder_min_hc": "min_hosting_capacity_mw",
 	"hca_refresh_date": "hosting_capacity_adopted_date"}
 
-def get_schema_mapping(utility_id: str) -> dict:
-	if utility_id.lower() == "utility_1":
-		return utility_1_schema_mapping
-	elif utility_id.lower() == "utility_2":
-		return utility_2_schema_mapping
+utility_1_installed_der_schema_mapping = {
+	"ProjectID": "utility_der_id",
+	"utility_1": "utility_id",
+	"utility_1_ProjectID": "canonical_der_id",
+	"NamePlateRating": "capacity_mw",
+	"INSTALLED": "status",
+	"CASE WHEN SolarPV > 0 → SOLAR, EnergyStorageSystem > 0 → STORAGE": "der_type",
+	"ProjectCircuitID": "utility_feeder_id",
+	"ingestion timestamp": "last_updated_ts",}
+
+utility_2_installed_der_schema_mapping = {
+	"DER_ID": "utility_der_id",
+	"utility_2": "utility_id",
+	"utility_2_DER_ID": "canonical_der_id",
+	"DER_NAMEPLATE_RATING": "capacity_mw",
+	"INSTALLED": "status",
+	"DER_TYPE": "der_type",
+	"DER_INTERCONNECTION_LOCATION": "utility_feeder_id",
+	"ingestion timestamp": "last_updated_ts"}
+
+SCHEMA_REGISTRY = {
+	"utility_1": {
+		CIRCUIT: utility_1_circuit_schema_mapping,
+		INSTALLED_DER: utility_1_installed_der_schema_mapping,
+	},
+	"utility_2": {
+		CIRCUIT: utility_2_circuit_schema_mapping,
+		INSTALLED_DER: utility_2_installed_der_schema_mapping,
+	},
+}
+
+def get_schema_mapping(utility_id: str, dataset_key: str) -> dict:
+	utility_id_lower = utility_id.lower()
+	if utility_id_lower in SCHEMA_REGISTRY:
+		if dataset_key in SCHEMA_REGISTRY[utility_id_lower]:
+			return SCHEMA_REGISTRY[utility_id_lower][dataset_key]
+		else:
+			raise ValueError(f"Unsupported dataset key: {dataset_key}")
 	else:
 		raise ValueError(f"Unsupported UTILITY_ID: {utility_id}")
