@@ -10,3 +10,5 @@ resources:
             serverless: true
             configuration:
                 bundle.sourcePath: ${workspace.file_path}
+                input.utilities.table: "all_utilities_circuit_table"
+                target.table: "recent_circuit_data_table"
