@@ -6,7 +6,7 @@ resources:
             schema: silver
             libraries:
                 - file:
-                    path: ../src/iedr-transformation/silver/network_circuit_data_normalized.py
+                    path: ../src/iedr-transformation/silver/*.py
             serverless: true
             configuration:
                 bundle.sourcePath: ${workspace.file_path}
