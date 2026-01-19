@@ -48,9 +48,9 @@ def installed_der_data_normalized():
 		return (
 		spark.read.format("delta").table(f"`{IEDR_CATALOG}`.bronze.{UTILITY_ID}_installed_der_delta_table").na.drop(how="all")
 			.withColumn("der_type",
-			            when(col("der_type") > "Steam", lit("SteamTurbine"))  # match
-			            .when(col("der_type") > "Combined Heat and Power", lit("CombinedHeatandPower"))  # match
-			            .when(col("der_type") > "Diesel", lit("MicroTurbine"))  # match
+			            when(col("der_type") == "Steam", lit("SteamTurbine"))  # match
+			            .when(col("der_type") == "Combined Heat and Power", lit("CombinedHeatandPower"))  # match
+			            .when(col("der_type") == "Diesel", lit("MicroTurbine"))  # match
 			            .otherwise(col("der_type")))
 			.selectExpr([f"{old_col} as {new_col}" for old_col, new_col in schema_mapping.items()])
 			.withColumn("utility_id", lit(f"{UTILITY_ID}"))
