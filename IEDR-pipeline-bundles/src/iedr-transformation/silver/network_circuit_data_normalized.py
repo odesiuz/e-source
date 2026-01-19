@@ -27,6 +27,7 @@ def network_circuit_data_normalized():
 		spark.read.format("delta")
 			.table(f"`{IEDR_CATALOG}`.bronze.{UTILITY_ID}_network_delta_table")
 			.selectExpr([f"{old_col} as {new_col}" for old_col, new_col in schema_mapping.items()])
+			.na.drop(how="all")
 			.withColumn("utility_id", lit(f"{UTILITY_ID}"))
 			.groupBy(["utility_id", "utility_feeder_id"])
 			.agg(max("feeder_voltage_kv").alias("feeder_voltage_kv"),
@@ -39,6 +40,7 @@ def network_circuit_data_normalized():
 		return (
 		spark.read.format("delta").table(f"`{IEDR_CATALOG}`.bronze.{UTILITY_ID}_network_delta_table")
 			.selectExpr([f"{old_col} as {new_col}" for old_col, new_col in schema_mapping.items()])
+			.na.drop(how="all")
 			.withColumn("utility_id", lit(f"{UTILITY_ID}"))
 		)
 	else:
