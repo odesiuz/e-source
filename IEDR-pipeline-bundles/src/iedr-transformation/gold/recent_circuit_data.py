@@ -14,12 +14,13 @@ try:
 except ImportError:
 	raise ImportError("pyspark.pipelines module is not available in this environment.")
 
-IEDR_CATALOG = "iedr-delta-catalog"
-TABLE_NAME = "recent_circuit_data_table"
+IEDR_CATALOG = spark.conf.get("pipelines.catalog")
+NORMALIZED_TABLE = spark.conf.get("input.utilities.table")
+TARGET_TABLE= spark.conf.get("target.table")
 
-@dp.table(name=f"`{IEDR_CATALOG}`.gold.{TABLE_NAME}", table_properties={"quality": "gold"})
+@dp.table(name=f"`{IEDR_CATALOG}`.gold.{TARGET_TABLE}", table_properties={"quality": "gold"})
 def recent_circuit_data():
 	return (
-		spark.table(f"`{IEDR_CATALOG}`.silver.all_utilities_circuit_normalized_table")
+		spark.table(f"`{IEDR_CATALOG}`.silver.{NORMALIZED_TABLE}")
 		.withColumn("processed_at", current_timestamp())
 	)
