@@ -83,7 +83,7 @@ resources:
           retry_on_timeout: false
           run_if: "ALL_SUCCESS"
         - task_key: recent_installed_and_planned_data_pipeline_task
-          description: "Gold table recent circuit data pipeline task using Lakeflow Declarative Pipelines"
+          description: "Gold table recent installed and planned data pipeline task using Lakeflow Declarative Pipelines"
           pipeline_task:
             pipeline_id: ${resources.pipelines.recent_installed_and_planned_data_pipeline.id}
           depends_on: [ { "task_key": combine_all_planned_tables_pipeline_task },
