@@ -1,0 +1,13 @@
+resources:
+    pipelines:
+        recent_installed_and_planned_data_pipeline:
+            name: recent_installed_and_planned_data_pipeline
+            catalog: iedr-delta-catalog
+            schema: gold
+            libraries:
+                - file:
+                    path: ../src/iedr-transformation/gold/recent_installed_and_planned_table.py
+            serverless: true
+            configuration:
+                bundle.sourcePath: ${workspace.file_path}
+                target.table: "recent_installed_and_planed_table"
