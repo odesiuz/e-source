@@ -5,6 +5,7 @@
     File Name: combine_all_normalized_table.py
 """
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, when, sum
 
 spark = SparkSession.builder.getOrCreate()
 
