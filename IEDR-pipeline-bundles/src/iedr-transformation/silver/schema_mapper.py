@@ -5,7 +5,7 @@
     File Name: schema_mapper.py
 """
 
-# dataset keys to normalized schema mapping for different utilities
+# dataset keys to schema mapping for different utilities
 CIRCUIT = "circuit"
 INSTALLED_DER = "installed_der"
 PLANNED_DER = "planned_der"
@@ -36,14 +36,28 @@ utility_2_installed_der_schema_mapping = {
 	"DER_TYPE": "der_type",
 	"DER_INTERCONNECTION_LOCATION": "utility_circuit_id"}
 
+utility_1_planned_der_schema_mapping = {
+	"ProjectID": "utility_der_id",
+	"NamePlateRating": "capacity_mw",
+	"der_type": "der_type",
+	"ProjectCircuitID": "utility_circuit_id"}
+
+utility_2_planned_der_schema_mapping = {
+	"INTERCONNECTION_QUEUE_REQUEST_ID": "utility_der_id",
+	"DER_NAMEPLATE_RATING": "capacity_mw",
+	"DER_TYPE": "der_type",
+	"DER_INTERCONNECTION_LOCATION": "utility_circuit_id"}
+
 SCHEMA_REGISTRY = {
 	"utility_1": {
 		CIRCUIT: utility_1_circuit_schema_mapping,
 		INSTALLED_DER: utility_1_installed_der_schema_mapping,
+		PLANNED_DER: utility_1_planned_der_schema_mapping,
 	},
 	"utility_2": {
 		CIRCUIT: utility_2_circuit_schema_mapping,
 		INSTALLED_DER: utility_2_installed_der_schema_mapping,
+		PLANNED_DER: utility_2_planned_der_schema_mapping,
 	},
 }
 
