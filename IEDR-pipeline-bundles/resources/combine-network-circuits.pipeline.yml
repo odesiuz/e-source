@@ -1,7 +1,7 @@
 resources:
     pipelines:
-        combine_all_utility_tables_pipeline:
-            name: combine_all_utility_tables_pipeline
+        combine_all_circuits_tables_pipeline:
+            name: combine_all_circuits_tables_pipeline
             catalog: iedr-delta-catalog
             schema: silver
             libraries:
