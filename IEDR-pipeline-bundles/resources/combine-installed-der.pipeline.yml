@@ -1,0 +1,17 @@
+resources:
+    pipelines:
+        combine_all_installed_tables_pipeline:
+            name: combine_all_installed_tables_pipeline
+            catalog: iedr-delta-catalog
+            schema: silver
+            libraries:
+                - file:
+                    path: ../src/iedr-transformation/silver/normalized_union/**
+            serverless: true
+            configuration:
+                bundle.sourcePath: ${workspace.file_path}
+                input.utilities.table: "installed_der_normalized_table"
+                target.table: "combined_installed_der_table"
+#                input.utilities:
+#                    - "utility_1"
+#                    - "utility_2"
