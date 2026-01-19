@@ -56,7 +56,17 @@ resources:
         - task_key: combine_all_installed_tables_pipeline_task
           description: "Union all utility installed der pipeline task using Lakeflow Declarative Pipelines"
           pipeline_task:
-            pipeline_id: ${resources.pipelines.combine_all_circuits_tables_pipeline.id}
+            pipeline_id: ${resources.pipelines.combine_all_installed_tables_pipeline.id}
+          depends_on: [ { "task_key": utility_1_transformation_pipeline_task },
+                        { "task_key": utility_2_transformation_pipeline_task } ]
+          timeout_seconds: 3600
+          max_retries: 2
+          retry_on_timeout: false
+          run_if: "ALL_SUCCESS"
+        - task_key: combine_all_planned_tables_pipeline_task
+          description: "Union all utility planned der pipeline task using Lakeflow Declarative Pipelines"
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.combine_all_planned_tables_pipeline.id}
           depends_on: [ { "task_key": utility_1_transformation_pipeline_task },
                         { "task_key": utility_2_transformation_pipeline_task } ]
           timeout_seconds: 3600
@@ -68,6 +78,16 @@ resources:
           pipeline_task:
             pipeline_id: ${resources.pipelines.recent_circuit_data_pipeline.id}
           depends_on: [ { "task_key": combine_all_circuits_tables_pipeline_task } ]
+          timeout_seconds: 3600
+          max_retries: 2
+          retry_on_timeout: false
+          run_if: "ALL_SUCCESS"
+        - task_key: recent_installed_and_planned_data_pipeline_task
+          description: "Gold table recent circuit data pipeline task using Lakeflow Declarative Pipelines"
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.recent_installed_and_planned_data_pipeline.id}
+          depends_on: [ { "task_key": combine_all_planned_tables_pipeline_task },
+                        { "task_key": combine_all_installed_tables_pipeline_task } ]
           timeout_seconds: 3600
           max_retries: 2
           retry_on_timeout: false
