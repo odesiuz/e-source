@@ -27,13 +27,12 @@ utility_2_circuit_schema_mapping = {
 utility_1_installed_der_schema_mapping = {
 	"ProjectID": "utility_der_id",
 	"NamePlateRating": "capacity_mw",
-	"INSTALLED": "status",
+	"der_type": "der_type",
 	"ProjectCircuitID": "utility_circuit_id"}
 
 utility_2_installed_der_schema_mapping = {
 	"DER_ID": "utility_der_id",
 	"DER_NAMEPLATE_RATING": "capacity_mw",
-	"INSTALLED": "status",
 	"DER_TYPE": "der_type",
 	"DER_INTERCONNECTION_LOCATION": "utility_circuit_id"}
 
