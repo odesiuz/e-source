@@ -45,4 +45,6 @@ databricks bundle deploy --profile "your-profile-name"
 ```
 If validation passes, you will see a success message. If there are errors, review the output to identify and fix issues in the resource YAML files.
 This command deploys the resources defined in the bundle to the specified Databricks workspace.
-![Screenshot 2026-01-19 at 8.35.18 PM.png](../../../../../var/folders/bn/dj_rgw1d1t5gkpklqk19p7c80000gn/T/TemporaryItems/NSIRD_screencaptureui_3VCSLk/Screenshot%202026-01-19%20at%208.35.18%E2%80%AFPM.png)
+
+#### Diagram for IEDR Pipeline workflow
+![IEDR Pipeline Architecture](Screenshot%202026-01-19%20at%208.59.18.png)
