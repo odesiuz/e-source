@@ -1,7 +1,7 @@
 # Databricks bundle — `e-source/IEDR-pipeline-bundles`
 
 ## Overview
-This folder contains the Databricks bundle for the IEDR pipelines. Use the Databricks Bundle CLI to validate and deploy declarative pipelines, jobs, notebooks and associated files to your Databricks workspace.
+This folder contains the Databricks bundle for the IEDR pipelines. Use the Databricks Bundle CLI to validate and deploy declarative pipelines, jobs and associated files to your Databricks workspace.
 
 Path: `e-source/IEDR-pipeline-bundles`
 
