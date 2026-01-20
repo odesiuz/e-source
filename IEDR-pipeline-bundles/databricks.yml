@@ -4,7 +4,17 @@ include:
   - resources/*.yml
   - resources/*/*.yml
 
-#targets:
-#  dev:
-#    default: true
-#    mode: development
+targets:
+  dev:
+    default: true
+    mode: development
+#    workspace:
+#      host: https://dbc-some-code-here.cloud.databricks.com
+#    variables:
+#      catalog: iedr_dev_delta_catalog
+  prod:
+    mode: production
+#    workspace:
+#      host: https://dbc-some-code-here.cloud.databricks.com
+#    variables:
+#      catalog: iedr_dev_delta_catalog
