@@ -92,3 +92,15 @@ resources:
           max_retries: 2
           retry_on_timeout: false
           run_if: "ALL_SUCCESS"
+        - task_key: iedr_api_warehouse_refresh_task
+          description: "IEDR API Warehouse Refresh Task"
+          sql_task:
+            warehouse_id: 0fa8bf268a5e187d
+            file:
+              path: ../src/sql/create-data-api-view.sql
+          depends_on: [ { "task_key": recent_circuit_data_pipeline_task },
+                          { "task_key": recent_installed_and_planned_data_pipeline_task } ]
+          timeout_seconds: 7200
+          max_retries: 2
+          retry_on_timeout: false
+          run_if: "ALL_SUCCESS"
