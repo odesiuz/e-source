@@ -2,7 +2,7 @@ resources:
     pipelines:
         recent_circuit_data_pipeline:
             name: recent_circuit_data_pipeline
-            catalog: iedr-delta-catalog
+            catalog: ${variables.catalog.default}
             schema: gold
             libraries:
                 - file:

@@ -2,7 +2,7 @@ resources:
     pipelines:
         utility_2_transformation_pipeline:
             name: utility_2_transformation_pipeline
-            catalog: iedr-delta-catalog
+            catalog: ${variables.catalog.default}
             schema: silver
             libraries:
                 - file:

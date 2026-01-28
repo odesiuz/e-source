@@ -2,7 +2,7 @@ resources:
     pipelines:
         recent_installed_and_planned_data_pipeline:
             name: recent_installed_and_planned_data_pipeline
-            catalog: iedr-delta-catalog
+            catalog: ${variables.catalog.default}
             schema: gold
             libraries:
                 - file:
