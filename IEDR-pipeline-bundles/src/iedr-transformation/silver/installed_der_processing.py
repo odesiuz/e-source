@@ -39,6 +39,8 @@ def installed_der_data_normalized():
 			            .when(col("SteamTurbine") > 0, lit("SteamTurbine"))
 			            .otherwise(lit("Other")))
 			.selectExpr([f"{old_col} as {new_col}" for old_col, new_col in schema_mapping.items()])
+			.dropDuplicates(subset=["utility_der_id", "capacity_mw", "der_type", "utility_circuit_id"])
+			.dropna(how="all")
 			.withColumn("utility_id", lit(f"{UTILITY_ID}"))
 			.withColumn("status", lit("INSTALLED"))
 			.withColumn("canonical_der_id", concat_ws("_", lit(f"{UTILITY_ID}"), col("utility_der_id")))
@@ -53,6 +55,8 @@ def installed_der_data_normalized():
 			            .when(col("der_type") == "Diesel", lit("MicroTurbine"))  # match
 			            .otherwise(col("der_type")))
 			.selectExpr([f"{old_col} as {new_col}" for old_col, new_col in schema_mapping.items()])
+			.dropDuplicates(subset=["utility_der_id", "capacity_mw", "der_type", "utility_circuit_id"])
+			.dropna(how="all")
 			.withColumn("utility_id", lit(f"{UTILITY_ID}"))
 			.withColumn("status", lit("INSTALLED"))
 			.withColumn("canonical_der_id", concat_ws("_", lit(f"{UTILITY_ID}"), col("utility_der_id")))

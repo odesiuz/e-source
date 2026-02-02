@@ -2,7 +2,7 @@ resources:
     pipelines:
         utility_1_ingestion_pipeline:
             name: utility_1_ingestion_pipeline
-            catalog: iedr-delta-catalog
+            catalog: ${variables.catalog.default}
             schema: bronze
             libraries:
                 - file:

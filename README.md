@@ -27,7 +27,7 @@ Path: `e-source/IEDR-pipeline-bundles`
 
 Note: workspace entries in resource YAML must reference files (not directories). If you point to a directory, validation/deploy will fail.
 
-## Validate bundle (safe check)
+## Validate and Deploy bundle (safe check)
 Run bundle validation to catch schema issues before deploy:
 
 ### Step 1: Navigate to the bundle directory

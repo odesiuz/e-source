@@ -3,18 +3,31 @@ bundle:
 include:
   - resources/*.yml
   - resources/*/*.yml
-
+variables:
+  catalog:
+    description: "Default Unity Catalog to use for the pipelines is the dev catalog"
+    default: iedr-dev-delta-catalog
 targets:
   dev:
     default: true
     mode: development
-#    workspace:
+    presets:
+      name_prefix: "dev_${workspace.current_user.short_name}_"
+      tags:
+        dev: 'true'
+    workspace:
 #      host: https://dbc-some-code-here.cloud.databricks.com
-#    variables:
-#      catalog: iedr_dev_delta_catalog
+      root_path: /Workspace/Users/uviase_o@yahoo.com/.bundle/iedr-pipeline-dev/
+    variables:
+      catalog: iedr-dev-delta-catalog
   prod:
     mode: production
-#    workspace:
+    presets:
+      name_prefix: 'prod_'
+      tags:
+        prod: 'true'
+    workspace:
 #      host: https://dbc-some-code-here.cloud.databricks.com
-#    variables:
-#      catalog: iedr_dev_delta_catalog
+      root_path: /Workspace/Users/uviase_o@yahoo.com/.bundle/iedr-pipeline-prod/
+    variables:
+      catalog: iedr-prod-delta-catalog

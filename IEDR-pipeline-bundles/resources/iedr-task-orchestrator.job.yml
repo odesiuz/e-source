@@ -95,6 +95,8 @@ resources:
         - task_key: iedr_api_warehouse_refresh_task
           description: "IEDR API Warehouse Refresh Task"
           sql_task:
+            parameters:
+              catalog_name: ${variables.catalog.default}
             warehouse_id: 0fa8bf268a5e187d
             file:
               path: ../src/sql/create-data-api-view.sql
